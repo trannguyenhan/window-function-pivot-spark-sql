@@ -41,8 +41,8 @@ public class Main {
         Dataset<Row> result_1 = data.groupBy("id")
         		.agg(functions.collect_list("price").as("prices"));
         
-        Dataset<Row> result_2 = data.groupBy("id")
-        		.agg(functions.collect_list("unit").as("units"));
+//        Dataset<Row> result_2 = data.groupBy("id")
+//        		.agg(functions.collect_list("unit").as("units"));
         
 //        result_1.flatMap(new FlatMapFunction<Row, Row>() {
 //			private static final long serialVersionUID = 1L;
@@ -60,6 +60,6 @@ public class Main {
 //		}, null);
         
         result_1.show();
-        result_2.show();
+//        result_2.show();
 	}
 }
