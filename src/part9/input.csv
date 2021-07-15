@@ -1,0 +1,6 @@
+Qid,Question,AnswerText,ParticipantID,Assessment,GeoTag
+1,Question1Text,Yes,abcde1,0,"(x1,y1)"
+2,Question2Text,No,abcde1,0,"(x1,y1)"
+3,Question3Text,3,abcde1,0,"(x1,y1)"
+1,Question1Text,No,abcde2,0,"(x2,y2)"
+2,Question2Text,Yes,abcde2,0,"(x2,y2)"
