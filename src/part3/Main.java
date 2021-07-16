@@ -1,11 +1,8 @@
 package part3;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Iterator;
 import java.util.List;
 
-import org.apache.spark.api.java.function.FlatMapFunction;
 import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;
 import org.apache.spark.sql.RowFactory;
@@ -38,28 +35,13 @@ public class Main {
         
         Dataset<Row> data = spark.createDataFrame(listOfdata,schema);
         
-        Dataset<Row> result_1 = data.groupBy("id")
-        		.agg(functions.collect_list("price").as("prices"));
+        Dataset<Row> result_1 = data.withColumn("concat_day", functions.concat(functions.lit("price_"), data.col("day")))
+				.groupBy("id").pivot("concat_day").agg(functions.first("price"));
         
-//        Dataset<Row> result_2 = data.groupBy("id")
-//        		.agg(functions.collect_list("unit").as("units"));
+        Dataset<Row> result_2 = data.withColumn("concat_day", functions.concat(functions.lit("unit_"), data.col("day")))
+				.groupBy("id").pivot("concat_day").agg(functions.first("units"));
         
-//        result_1.flatMap(new FlatMapFunction<Row, Row>() {
-//			private static final long serialVersionUID = 1L;
-//
-//			@Override
-//			public Iterator<Row> call(Row row) throws Exception {
-//				List<Integer> list = row.getList(1);
-//				
-//				List<Row> listTmpRow = new ArrayList<Row>();
-//				
-//				
-//				return null;
-//			}
-//
-//		}, null);
-        
-        result_1.show();
-//        result_2.show();
+        Dataset<Row> result = result_1.join(result_2, result_1.col("id").$eq$eq$eq(result_2.col("id"))).drop(result_2.col("id")).sort("id");
+        result.show();
 	}
 }
