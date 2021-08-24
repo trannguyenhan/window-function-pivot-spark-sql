@@ -1,4 +1,4 @@
-*root project : [https://gitlab.com/trannguyenhan/bigdata-demo](https://gitlab.com/trannguyenhan/bigdata-demo)*
+[https://gitlab.com/trannguyenhan/bigdata-demo](https://gitlab.com/trannguyenhan/bigdata-demo)
 
 ## run
 ```
